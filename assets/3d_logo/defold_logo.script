@@ -1,0 +1,4 @@
+function init(self)
+    go.animate('.', 'euler.y', go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_LINEAR, 5, 1, 0)
+    go.animate('.', 'euler.x', go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_LINEAR, 5, 1, 0)
+end
