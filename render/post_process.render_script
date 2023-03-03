@@ -76,6 +76,7 @@ function init(self)
         }
     }
     self.target = render.render_target("effects", target_params)
+    self.do_post_process = false
 end
 
 local function do_world(self, window_width, window_height)
@@ -130,14 +131,17 @@ function update(self)
     if window_width == 0 or window_height == 0 then
         return
     end
+    if self.do_post_process then
     render.set_render_target(self.target)
+    end
     do_world(self, window_width, window_height)
+    if self.do_post_process then
     render.disable_render_target(self.target)
     
     render.enable_texture(0, self.target, render.BUFFER_COLOR_BIT)
-    render.draw(self.effects_pred, {frustum = frustum}) 
+        render.draw(self.effects_pred) 
     render.disable_texture(0, self.target)
-    
+    end
     do_gui(self, window_width, window_height)
 end
 
@@ -162,5 +166,7 @@ function on_message(self, message_id, message)
         self.near = message.near or -1
         self.far = message.far or 1
         self.projection_fn = fixed_fit_projection
+    elseif message_id == hash("toggle_pp") then
+        self.do_post_process = not self.do_post_process
     end
 end

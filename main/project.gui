@@ -42,7 +42,8 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Hi there Defolder!"
+  text: "Hi there Defolder!\n"
+  "Press SPACE to toggle effect"
   font: "project"
   id: "text"
   xanchor: XANCHOR_NONE
